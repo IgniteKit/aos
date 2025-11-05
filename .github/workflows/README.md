@@ -11,7 +11,7 @@ This directory contains automated workflows for the AOS project.
 **What it does:**
 - Runs linting with ESLint
 - Builds the project with Vite
-- Tests on Node.js versions 18, 20, and 22
+- Tests on Node.js versions 22 and 24
 - Verifies all build artifacts are created
 - Uploads build artifacts
 
@@ -139,7 +139,7 @@ npm test
 ## Troubleshooting
 
 ### Build Fails
-- Check Node.js version compatibility (requires Node 18+)
+- Check Node.js version compatibility (requires Node 22+)
 - Ensure all dependencies are in package.json
 - Verify build command works locally: `npm run build`
 
