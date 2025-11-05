@@ -3,7 +3,7 @@
   "version": "3.0.0",
   "type": "module",
   "description": "Animate on scroll library",
-  "homepage": "https://github.com/ignitekit/aos",
+  "homepage": "https://github.com/IgniteKit/aos",
   "author": "IgniteKit <ignitekit@ideologix.com>",
   "license": "MIT",
   "main": "dist/aos.cjs.js",
@@ -11,7 +11,7 @@
   "browser": "dist/aos.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ignitekit/aos.git"
+    "url": "https://github.com/IgniteKit/aos.git"
   },
   "bugs": {
     "url": "https://github.com/ignitekit/aos/issues"

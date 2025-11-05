@@ -23,23 +23,26 @@ This directory contains automated workflows for the AOS project.
 
 ### 2. Build on Release (`build-on-release.yml`)
 
-**Triggers:** When a new GitHub release is created or published
+**Triggers:** When a GitHub release is published
 
 **What it does:**
 - Checks out the release commit
 - Installs dependencies and builds production assets
-- Creates compressed archives (.tar.gz and .zip)
-- Uploads dist files to the GitHub release:
-  - `aos.js` - UMD bundle
-  - `aos.css` - Styles
-  - `aos.esm.js` - ES Module
-  - `aos.cjs.js` - CommonJS
-  - Compressed archives with all files
+- Creates two compressed archives with all dist files:
+  - `dist.tar.gz` - Compressed tarball
+  - `dist.zip` - ZIP archive
+- Uploads archives to the GitHub release
+
+**Contents of archives:**
+- `aos.js` - UMD bundle
+- `aos.css` - Styles
+- `aos.esm.js` - ES Module
+- `aos.cjs.js` - CommonJS
 
 **Usage:**
-1. Create a new release on GitHub
-2. Workflow automatically builds and attaches dist files
-3. Users can download pre-built files directly from the release
+1. Publish a release on GitHub
+2. Workflow automatically builds and attaches dist archives
+3. Users can download and extract pre-built files
 
 ---
 

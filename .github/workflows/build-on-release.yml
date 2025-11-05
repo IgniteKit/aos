@@ -36,21 +36,15 @@ jobs:
 
       - name: Compress dist files
         run: |
-          cd dist
-          tar -czf ../aos-dist-${{ github.event.release.tag_name }}.tar.gz .
-          cd ..
-          zip -r aos-dist-${{ github.event.release.tag_name }}.zip dist/
+          tar -czf dist.tar.gz -C dist .
+          zip -r dist.zip dist/
 
       - name: Upload dist assets to release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            aos-dist-${{ github.event.release.tag_name }}.tar.gz
-            aos-dist-${{ github.event.release.tag_name }}.zip
-            dist/aos.js
-            dist/aos.css
-            dist/aos.esm.js
-            dist/aos.cjs.js
+            dist.tar.gz
+            dist.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -60,10 +54,14 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "Built for release: **${{ github.event.release.tag_name }}**" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### Files:" >> $GITHUB_STEP_SUMMARY
+          echo "### Distribution Files:" >> $GITHUB_STEP_SUMMARY
           echo "- \`aos.js\` - UMD bundle ($(du -h dist/aos.js | cut -f1))" >> $GITHUB_STEP_SUMMARY
           echo "- \`aos.css\` - Styles ($(du -h dist/aos.css | cut -f1))" >> $GITHUB_STEP_SUMMARY
           echo "- \`aos.esm.js\` - ES Module ($(du -h dist/aos.esm.js | cut -f1))" >> $GITHUB_STEP_SUMMARY
           echo "- \`aos.cjs.js\` - CommonJS ($(du -h dist/aos.cjs.js | cut -f1))" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "✅ All artifacts uploaded to release" >> $GITHUB_STEP_SUMMARY
+          echo "### Release Archives:" >> $GITHUB_STEP_SUMMARY
+          echo "- \`dist.tar.gz\` - Compressed tarball ($(du -h dist.tar.gz | cut -f1))" >> $GITHUB_STEP_SUMMARY
+          echo "- \`dist.zip\` - ZIP archive ($(du -h dist.zip | cut -f1))" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Archives uploaded to release" >> $GITHUB_STEP_SUMMARY
