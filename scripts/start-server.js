@@ -1,15 +1,30 @@
-const liveServer = require('live-server');
+import express from 'express';
+import { fileURLToPath } from 'url';
+import { dirname, resolve } from 'path';
 
-const params = {
-  port: 8080,
-  host: '0.0.0.0',
-  root: './demo',
-  watch: ['dist/**', 'demo/**'],
-  open: process.env.NODE_ENV !== 'test',
-  mount: [['/dist', './dist']],
-  noCssInject: true
-};
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-const server = liveServer.start(params);
+async function startServer() {
+  const app = express();
+  const root = resolve(__dirname, '..');
 
-module.exports = server;
+  // Serve dist files at /dist
+  app.use('/dist', express.static(resolve(root, 'dist')));
+
+  // Serve demo files at root
+  app.use(express.static(resolve(root, 'demo')));
+
+  const server = app.listen(8080, '127.0.0.1', () => {
+    console.log('Server running at http://127.0.0.1:8080');
+  });
+
+  // Wait a bit to ensure server is fully ready
+  await new Promise(resolve => setTimeout(resolve, 500));
+
+  return server;
+}
+
+const serverPromise = startServer();
+
+export default serverPromise;

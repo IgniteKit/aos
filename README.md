@@ -1,8 +1,8 @@
 [![AOS - Animate on scroll library](https://s32.postimg.org/ktvt59hol/aos_header.png)](http://michalsnik.github.io/aos/)
 
-[![NPM version](https://img.shields.io/npm/v/aos/next.svg?style=flat)](https://npmjs.org/package/aos)
-[![NPM downloads](https://img.shields.io/npm/dm/aos.svg?style=flat)](https://npmjs.org/package/aos)
-[![Build Status](https://travis-ci.org/michalsnik/aos.svg?branch=master)](https://travis-ci.org/michalsnik/aos)
+[![NPM version](https://img.shields.io/npm/v/@ignitekit/aos.svg?style=flat)](https://npmjs.org/package/@ignitekit/aos)
+[![NPM downloads](https://img.shields.io/npm/dm/@ignitekit/aos.svg?style=flat)](https://npmjs.org/package/@ignitekit/aos)
+[![CI](https://github.com/michalsnik/aos/workflows/CI/badge.svg)](https://github.com/michalsnik/aos/actions/workflows/ci.yml)
 [![Gitter](https://badges.gitter.im/michalsnik/aos.svg)](https://gitter.im/michalsnik/aos?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 [![Twitter Follow](https://img.shields.io/twitter/follow/michalsnik.svg?style=social)](https://twitter.com/michalsnik) [![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/home?status=AOS%20-%20Animate%20on%20Scroll%20library%0Ahttps%3A//github.com/michalsnik/aos)
@@ -31,12 +31,12 @@ For last stable release (v2) go [here](https://github.com/michalsnik/aos/tree/v2
 Add styles in `<head>`:
 
 ```html
-  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="stylesheet" href="https://unpkg.com/@ignitekit/aos@next/dist/aos.css" />
 ```
 
 Add script right before closing `</body>` tag, and initialize AOS:
 ```html
-  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script src="https://unpkg.com/@ignitekit/aos@next/dist/aos.js"></script>
   <script>
     AOS.init();
   </script>
@@ -44,14 +44,14 @@ Add script right before closing `</body>` tag, and initialize AOS:
 
 ### Using package managers
 
-Install `aos` package:
-* `yarn add aos@next`
-* or `npm install --save aos@next`
+Install `@ignitekit/aos` package:
+* `npm install @ignitekit/aos@next`
+* or `yarn add @ignitekit/aos@next`
 
 Import script, styles and initialize AOS:
 ```js
-import AOS from 'aos';
-import 'aos/dist/aos.css'; // You can also use <link> for styles
+import AOS from '@ignitekit/aos';
+import '@ignitekit/aos/dist/aos.css'; // You can also use <link> for styles
 // ..
 AOS.init();
 ```

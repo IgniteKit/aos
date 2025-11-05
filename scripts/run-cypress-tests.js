@@ -1,7 +1,14 @@
-const cypress = require('cypress');
-const server = require('./start-server');
+import cypress from 'cypress';
+import serverPromise from './start-server.js';
 
-cypress.run().then(({ failures }) => {
-  server.close();
-  process.exit(failures === 0 ? 0 : 1);
+serverPromise.then(async server => {
+  try {
+    const results = await cypress.run();
+    await server.close();
+    process.exit(results.totalFailed === 0 ? 0 : 1);
+  } catch (error) {
+    console.error('Test error:', error);
+    await server.close();
+    process.exit(1);
+  }
 });

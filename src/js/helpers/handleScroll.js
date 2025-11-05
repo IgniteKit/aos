@@ -24,7 +24,7 @@ const fireEvent = (eventName, data) => {
     customEvent.initCustomEvent(eventName, true, true, { detail: data });
   } else {
     customEvent = new CustomEvent(eventName, {
-      detail: data
+      detail: data,
     });
   }
 

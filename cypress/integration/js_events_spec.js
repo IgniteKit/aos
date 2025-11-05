@@ -1,13 +1,12 @@
-describe('JS Events', function() {
-  context('default events', function() {
+describe('JS Events', function () {
+  context('default events', function () {
     let aosInStub;
     let aosOutStub;
 
     before(() => {
       aosInStub = cy.stub();
       aosOutStub = cy.stub();
-      cy
-        .visit('/')
+      cy.visit('/')
         .document()
         .then(document => {
           document.addEventListener('aos:in', aosInStub);
@@ -16,7 +15,7 @@ describe('JS Events', function() {
         .initAOS();
     });
 
-    it('Should trigger custom events', function() {
+    it('Should trigger custom events', function () {
       expect(aosInStub).to.have.callCount(6);
       expect(aosOutStub).to.be.not.called;
 
@@ -33,15 +32,14 @@ describe('JS Events', function() {
     });
   });
 
-  context('custom events', function() {
+  context('custom events', function () {
     let aosInStub;
     let aosOutStub;
 
     before(() => {
       aosInStub = cy.stub();
       aosOutStub = cy.stub();
-      cy
-        .visit('/')
+      cy.visit('/')
         .document()
         .then(document => {
           document.addEventListener('aos:in:super-duper', aosInStub);
@@ -50,7 +48,7 @@ describe('JS Events', function() {
         .initAOS();
     });
 
-    it('Should trigger custom events', function() {
+    it('Should trigger custom events', function () {
       expect(aosInStub).to.be.not.called;
       expect(aosOutStub).to.be.not.called;
 

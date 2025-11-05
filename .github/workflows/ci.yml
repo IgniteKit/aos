@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  push:
+    branches: [next, main, master]
+  pull_request:
+    branches: [next, main, master]
+
+jobs:
+  lint-and-build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18, 20, 22]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run linting
+        run: npm run lint
+
+      - name: Build production assets
+        run: npm run build
+
+      - name: Verify build output
+        run: |
+          test -f dist/aos.js || { echo "❌ dist/aos.js not found"; exit 1; }
+          test -f dist/aos.css || { echo "❌ dist/aos.css not found"; exit 1; }
+          test -f dist/aos.esm.js || { echo "❌ dist/aos.esm.js not found"; exit 1; }
+          test -f dist/aos.cjs.js || { echo "❌ dist/aos.cjs.js not found"; exit 1; }
+          echo "✅ All build artifacts created successfully"
+
+      - name: Upload build artifacts
+        if: matrix.node-version == 20
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-files
+          path: dist/
+          retention-days: 7
+
+  build-summary:
+    runs-on: ubuntu-latest
+    needs: [lint-and-build]
+    if: always()
+
+    steps:
+      - name: Check job statuses
+        run: |
+          echo "## CI Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- Lint & Build: ${{ needs.lint-and-build.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ needs.lint-and-build.result }}" = "success" ]; then
+            echo "✅ All checks passed!" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ Some checks failed" >> $GITHUB_STEP_SUMMARY
+          fi

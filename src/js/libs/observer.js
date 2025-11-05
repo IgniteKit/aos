@@ -56,7 +56,7 @@ function ready(selector, fn) {
   observer.observe(doc.documentElement, {
     childList: true,
     subtree: true,
-    removedNodes: true
+    removedNodes: true,
   });
 }
 
